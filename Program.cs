@@ -32,6 +32,7 @@ namespace TrOCR
             var version = Environment.OSVersion.Version;
             var value = new Version("6.1");
             Factor = CommonHelper.GetDpiFactor();
+
             if (version.CompareTo(value) >= 0)
             {
                 CommonHelper.SetProcessDPIAware();
@@ -43,11 +44,12 @@ namespace TrOCR
                     Start_set = ""
                 }.ShowDialog();
             }
-            Task.Factory.StartNew(CheckUpdate);
+            // Task.Factory.StartNew(CheckUpdate);
+            if (needNew) CommonHelper.ShowHelpMsg("欢迎使用强哥专用修复版", 1500);
             Application.Run(new FmMain());
         }
 
-        
+
 
         public static void CheckUpdate()
         {
@@ -113,21 +115,21 @@ namespace TrOCR
                 {
                 }
 
-                IniHelper.SetValue("配置", "接口", "搜狗");
+                IniHelper.SetValue("配置", "接口", "中英");
                 IniHelper.SetValue("配置", "开机自启", "True");
                 IniHelper.SetValue("配置", "快速翻译", "True");
                 IniHelper.SetValue("配置", "识别弹窗", "True");
-                IniHelper.SetValue("配置", "窗体动画", "窗体");
+                IniHelper.SetValue("配置", "窗体动画", "罗小黑");
                 IniHelper.SetValue("配置", "记录数目", "20");
                 IniHelper.SetValue("配置", "自动保存", "True");
                 IniHelper.SetValue("配置", "截图位置", Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-                IniHelper.SetValue("配置", "翻译接口", "谷歌");
+                IniHelper.SetValue("配置", "翻译接口", "有道");
                 IniHelper.SetValue("快捷键", "文字识别", "F4");
                 IniHelper.SetValue("快捷键", "翻译文本", "F9");
                 IniHelper.SetValue("快捷键", "记录界面", "请按下快捷键");
                 IniHelper.SetValue("快捷键", "识别界面", "请按下快捷键");
-                IniHelper.SetValue("密钥_百度", "secret_id", "YsZKG1wha34PlDOPYaIrIIKO");
-                IniHelper.SetValue("密钥_百度", "secret_key", "HPRZtdOHrdnnETVsZM2Nx7vbDkMfxrkD");
+                IniHelper.SetValue("密钥_百度", "secret_id", "SMfTnnAM6kjrfNA9pN0cejtr");
+                IniHelper.SetValue("密钥_百度", "secret_key", "FqKD8q9Rj9kungEZWtupZGIdAhBijnsh ");
                 IniHelper.SetValue("代理", "代理类型", "系统代理");
                 IniHelper.SetValue("代理", "服务器", "");
                 IniHelper.SetValue("代理", "端口", "");
@@ -135,7 +137,7 @@ namespace TrOCR
                 IniHelper.SetValue("代理", "服务器账号", "");
                 IniHelper.SetValue("代理", "服务器密码", "");
                 IniHelper.SetValue("更新", "检测更新", "True");
-                IniHelper.SetValue("更新", "更新间隔", "True");
+                IniHelper.SetValue("更新", "更新间隔", "False");
                 IniHelper.SetValue("更新", "间隔时间", "24");
                 IniHelper.SetValue("截图音效", "自动保存", "True");
                 IniHelper.SetValue("截图音效", "音效路径", "Data\\screenshot.wav");
@@ -155,7 +157,7 @@ namespace TrOCR
         {
             if (IniHelper.GetValue("配置", "接口") == "发生错误")
             {
-                IniHelper.SetValue("配置", "接口", "搜狗");
+                IniHelper.SetValue("配置", "接口", "中英");
             }
 
             if (IniHelper.GetValue("配置", "开机自启") == "发生错误")
@@ -190,7 +192,7 @@ namespace TrOCR
 
             if (IniHelper.GetValue("配置", "翻译接口") == "发生错误")
             {
-                IniHelper.SetValue("配置", "翻译接口", "谷歌");
+                IniHelper.SetValue("配置", "翻译接口", "有道");
             }
 
             if (IniHelper.GetValue("配置", "截图位置") == "发生错误")
